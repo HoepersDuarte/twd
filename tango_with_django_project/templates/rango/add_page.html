@@ -1,5 +1,6 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
+{% load bootstrap_toolkit %}
 
 {% block title_block %}
     Adicionar Página
@@ -8,18 +9,17 @@
 {% block body_block %}
     {% if category %}
         <div>
-            <h1>Adicionar Página em {{ category.name }}</h1>
-            <form id="page_form" method="post" action="{%  url 'add_page' category.slug %}">
+            <form role="form" id="page_form" method="post" action="{%  url 'add_page' category.slug %}">
+                <h2 class="form-signin-heading">
+                    Adicione página a
+                    <a href="{% url 'show_category' category.slug %}"> {{ category.name }}</a>
+                </h2>
                 {% csrf_token %}
-                {% for hidden in form.hidden_fields %}
-                    {{ hidden }}
-                {% endfor %}
-                {% for field in form.visible_fields %}
-                    {{ field.errors }}
-                    {{ field.help_text }}
-                    {{ field }}
-                {% endfor %}
-                <input type="submit" name="submit" value="Criar Página em {{category.name}}" />
+                {{ form|as_bootstrap }}
+                <br/>
+                <button class="btn btn-primary" type="submit" name="submit">
+                    Criar página em {{category.name}}
+                </button>
             </form>
         </div>
     {%  else %}
