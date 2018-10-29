@@ -3,10 +3,10 @@ from django.shortcuts import render
 
 def index(request):
     context_dict = {}
-    context_dict['boldmessage'] = 'Hellow Word!'
-    context_dict['autor'] = 'HoepersDuarte'
-    return render(request, 'rango/inde.html', context=context_dict)
+    context_dict['boldmessage'] = "Olá BSI6, este texto veio da view!"
+    context_dict["autor"] = "Marco André Mendes"
 
+    return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
     texto = '''
